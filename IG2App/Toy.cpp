@@ -1,5 +1,6 @@
 #include "Toy.h"
-
+#include <SDL_keycode.h>
+#include <Ogre.h>
 
 
 Toy::Toy(Ogre::SceneNode* sToy)
@@ -38,11 +39,52 @@ Toy::Toy(Ogre::SceneNode* sToy)
 	ombligo->setPosition(0, 0, -100);
 	ombligo->setScale(0.1, 0.1, 0.1);
 
+	
+	
 
+}
+void Toy::frameRendered(const Ogre::FrameEvent& evt) {
 
+	if (!parado) {
+		
+		cuello->translate(0, 0, 30*evt.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+		cuerpo->rotate(Ogre::Vector3(30 * evt.timeSinceLastFrame, 0, 0), Ogre::Radian(0.05f));
+		cabeza->rotate(Ogre::Vector3(0, 30 * evt.timeSinceLastFrame, 0), Ogre::Radian(0.01f));
+	}
 
 }
 
+
+bool Toy::keyPressed(const OgreBites::KeyboardEvent & evt)
+{
+	switch(evt.keysym.sym)
+	{
+	case SDLK_t:
+		
+		//cuello->setPosition(cuello->getPosition().x + cuello->getOrientation().x, cuello->getPosition().y, cuello->getPosition().z + cuello->getOrientation().z);
+		cuello->translate(0,0,1, Ogre::Node::TS_LOCAL);
+		cuerpo->rotate(Ogre::Vector3(1, 0, 0), Ogre::Radian(0.05f));
+		cabeza->rotate(Ogre::Vector3(0, 1, 0), Ogre::Radian(0.01f));
+	
+		
+
+		break;
+	case SDLK_y:
+
+		if (!parado)
+			parado = true;
+		else parado = false;
+
+		break;
+
+	case SDLK_v:
+
+		cuello->rotate(Ogre::Vector3(0, 1, 0), Ogre::Radian(3.14/4));
+
+		break;
+	}
+	return false;
+}
 
 Toy::~Toy()
 {

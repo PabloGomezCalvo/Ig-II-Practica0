@@ -13,7 +13,9 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
     getRoot()->queueEndRendering();
   }
-  //else if (evt.keysym.sym == SDLK_???)
+  else if (evt.keysym.sym == SDLK_p) {
+	  mPlaneNode->rotate(Ogre::Vector3(1, 0, 0), Ogre::Radian(3.14 / 4));
+  }
   
   return true;
 }
@@ -98,6 +100,8 @@ void IG2App::setupScene(void)
 
   mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("nPlane");
   mPlaneNode->attachObject(ent1);
+
+  ent1->setMaterialName("IG2App/plano");
   // finally something to render
 
   Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
@@ -130,6 +134,7 @@ void IG2App::setupScene(void)
   Ogre::SceneNode* nodeToy = mPlaneNode->createChildSceneNode("Toy");
   mToyNode = new Toy(nodeToy);
 
+  addInputListener(mToyNode);
    
   
   //-------------------------------------------------------------------------

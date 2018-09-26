@@ -1,0 +1,18 @@
+material IG2App/plano
+{
+	technique
+	{
+		pass
+		{
+		diffuse 0.5 0.5 0.5
+			texture_unit
+			{
+				texture 1d_debug.png
+				colour_op modulate
+			}
+
+			
+			
+		}
+	}
+}

@@ -1,0 +1,3 @@
+Instrucciones para ejecutar el proyecto IG2App:
+
+Ejecutar en modo "Release" y x86
