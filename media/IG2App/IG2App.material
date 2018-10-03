@@ -4,15 +4,23 @@ material IG2App/plano
 	{
 		pass
 		{
-		diffuse 0.5 0.5 0.5
+			ambient 0.1 0.1 0.1
+			scene_blend add
+			depth_write off
+			cull_software none
+			cull_hardware none
+
 			texture_unit
 			{
-				texture 1d_debug.png
-				colour_op modulate
+				texture Water01.jpg
+				scroll_anim 0.125 0
 			}
 
-			
-			
+			texture_unit
+			{
+				texture Water01.jpg
+				wave_xform scroll_y sine 0 0.1 0 0.25
+			}
 		}
 	}
 }

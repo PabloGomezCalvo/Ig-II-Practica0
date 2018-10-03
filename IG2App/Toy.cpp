@@ -1,9 +1,8 @@
 #include "Toy.h"
-#include <SDL_keycode.h>
 #include <Ogre.h>
 
 
-Toy::Toy(Ogre::SceneNode* sToy)
+Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 {
 	//mToyNode = sToy->getCreator()->getSceneNode("nPlane")->createChildSceneNode("nToy");
 

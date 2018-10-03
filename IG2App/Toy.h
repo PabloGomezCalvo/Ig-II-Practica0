@@ -1,10 +1,7 @@
 #pragma once
-#include <OgreSceneManager.h>
-#include <OgreSceneNode.h>
-#include <OgreEntity.h>
-#include <OgreMeshManager.h>
-#include <OgreInput.h>
-class Toy: public OgreBites::InputListener
+
+#include "Objects.h"
+class Toy: public Objects
 {
 public:
 	Toy(Ogre::SceneNode* sToy);

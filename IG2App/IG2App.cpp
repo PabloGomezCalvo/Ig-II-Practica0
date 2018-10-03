@@ -1,9 +1,7 @@
 #include "IG2App.h"
 
-#include <OgreEntity.h>
-#include <OgreInput.h>
-#include <SDL_keycode.h>
-#include <OgreMeshManager.h>
+
+
 
 using namespace Ogre;
 
@@ -90,32 +88,8 @@ void IG2App::setupScene(void)
   //lightNode->setPosition(0, 0, 1000);
  
   //------------------------------------------------------------------------
-  MeshManager::getSingleton().createPlane(("mPlane1080x800"),
-	  (ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME),
-	  Plane(Plane(Vector3::UNIT_Y, 0)), (1080), (800),
-	  (100), (80), (true),
-	  (1), (1.0), (1.0), (Vector3::UNIT_Z));
 
-  Ogre::Entity* ent1 = mSM->createEntity("mPlane1080x800");
-
-  mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("nPlane");
-  mPlaneNode->attachObject(ent1);
-
-  ent1->setMaterialName("IG2App/plano");
-  // finally something to render
-
-  Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
   
-
-  mSinbadNode = mSM->getSceneNode("nPlane")->createChildSceneNode("nSinbad");
-  mSinbadNode->attachObject(ent);
-
-
-  mSinbadNode->setPosition(400, 100, -300);
-  mSinbadNode->setScale(20, 20, 20);
-  mSinbadNode->yaw(Ogre::Degree(-45));
-  mSinbadNode->showBoundingBox(true);
-  //mSinbadNode->setVisible(false);
 
 
   
@@ -131,10 +105,20 @@ void IG2App::setupScene(void)
 
   //------------------------------------------------------------------------
 
-  Ogre::SceneNode* nodeToy = mPlaneNode->createChildSceneNode("Toy");
-  mToyNode = new Toy(nodeToy);
+  mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("nPlane");;
+  plano = new PlaneObject(mPlaneNode);
 
-  addInputListener(mToyNode);
+
+  mToyNode = mPlaneNode->createChildSceneNode("Toy");
+  toy = new Toy(mToyNode);
+
+  
+  mSinbadNode = mPlaneNode->createChildSceneNode("Sinbad");
+  sinbad = new Sinbad(mSinbadNode);
+
+  
+
+  addInputListener(toy);
    
   
   //-------------------------------------------------------------------------
