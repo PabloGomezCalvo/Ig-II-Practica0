@@ -109,16 +109,24 @@ void IG2App::setupScene(void)
   plano = new PlaneObject(mPlaneNode);
 
 
-  mToyNode = mPlaneNode->createChildSceneNode("Toy");
-  toy = new Toy(mToyNode);
+  //mToyNode = mPlaneNode->createChildSceneNode("Toy");
+  //toy = new Toy(mToyNode);
 
   
   mSinbadNode = mPlaneNode->createChildSceneNode("Sinbad");
   sinbad = new Sinbad(mSinbadNode);
 
+  addInputListener(sinbad);
   
 
-  addInputListener(toy);
+  //addInputListener(toy);
+
+
+  mBombNode = mPlaneNode->createChildSceneNode("nBomb");
+  bomb = new Bomb(mBombNode);
+
+  addInputListener(bomb);
+
    
   
   //-------------------------------------------------------------------------

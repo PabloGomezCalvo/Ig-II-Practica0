@@ -9,6 +9,7 @@
 #include "Toy.h"
 #include "Sinbad.h"
 #include "Plane.h"
+#include "Bomb.h"
 #include "Objects.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -32,9 +33,11 @@ protected:
   Ogre::SceneNode* mSinbadNode = nullptr;
   Ogre::SceneNode* mPlaneNode = nullptr;
   Ogre::SceneNode* mToyNode = nullptr;
+  Ogre::SceneNode* mBombNode = nullptr;
   Objects* toy;
   Objects* sinbad;
   Objects* plano;
+  Objects* bomb;
   Objects* objetos;
 
   OgreBites::CameraMan* mCamMgr = nullptr;

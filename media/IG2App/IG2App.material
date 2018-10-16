@@ -24,3 +24,22 @@ material IG2App/plano
 		}
 	}
 }
+
+
+
+
+material IG2App/Bomb
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.75 0.75 0.75
+
+			texture_unit
+			{
+				texture BumpyMetal.jpg
+			}
+		}
+	}
+}
