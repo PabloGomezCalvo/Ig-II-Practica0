@@ -60,9 +60,13 @@ void IG2App::setupScene(void)
   cam->setFarClipDistance(10000);
   cam->setAutoAspectRatio(true);
   //cam->setPolygonMode(Ogre::PM_WIREFRAME); 
+  //camara para el reflejo
+ 
+
 
   mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
   mCamNode->attachObject(cam);
+  
 
   mCamNode->setPosition(0, 0, 1000);
   mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
@@ -105,9 +109,10 @@ void IG2App::setupScene(void)
 
   //------------------------------------------------------------------------
 
-  mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("nPlane");;
+  mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("nPlane");
+  
   plano = new PlaneObject(mPlaneNode);
-
+  
 
   //mToyNode = mPlaneNode->createChildSceneNode("Toy");
   //toy = new Toy(mToyNode);
@@ -126,7 +131,7 @@ void IG2App::setupScene(void)
   bomb = new Bomb(mBombNode);
 
   addInputListener(bomb);
-
+ 
    
   
   //-------------------------------------------------------------------------

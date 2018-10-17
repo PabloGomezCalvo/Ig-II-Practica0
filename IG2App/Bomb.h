@@ -9,6 +9,7 @@ public:
 	Ogre::Entity* ent = nullptr;
 	Ogre::SceneNode* mBomb = nullptr;
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	AnimationState * animationState = nullptr;
 	~Bomb();
 };

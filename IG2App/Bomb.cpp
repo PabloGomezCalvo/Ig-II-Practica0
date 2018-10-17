@@ -61,6 +61,17 @@ void Bomb::frameRendered(const Ogre::FrameEvent& evt) {
 
 };
 
+bool Bomb::keyPressed(const OgreBites::KeyboardEvent& evt) {
+	switch (evt.keysym.sym)
+	{
+	case SDLK_b:
+		
+		break;
+	default:
+		break;
+	}
+	return true;
+}
 
 Bomb::~Bomb()
 {
