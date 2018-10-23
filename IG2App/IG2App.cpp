@@ -112,7 +112,8 @@ void IG2App::setupScene(void)
   mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("nPlane");
   
   plano = new PlaneObject(mPlaneNode);
-  
+  
+
 
   //mToyNode = mPlaneNode->createChildSceneNode("Toy");
   //toy = new Toy(mToyNode);

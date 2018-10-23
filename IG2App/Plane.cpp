@@ -18,35 +18,44 @@ PlaneObject::PlaneObject(Ogre::SceneNode* sPlane): Objects(sPlane)
 	mPlane->attachObject(ent1);
 
 	ent1->setMaterialName("IG2App/plano");
+	
 
 	//Reflejo
 	
-	//Camera* camRef = mPlane->getCreator()->createCamera("RefCam");
-	//camRef->setNearClipDistance(1);
-	//camRef->setFarClipDistance(10000);
-	//camRef->setAutoAspectRatio(true);
-	//mPlane->getCreator()->getSceneNode("nCam")->attachObject(camRef);
-	//
+	Camera* camRef = mPlane->getCreator()->createCamera("RefCam");
+	camRef->setNearClipDistance(1);
+	camRef->setFarClipDistance(10000);
+	camRef->setAutoAspectRatio(true);
+	mPlane->getCreator()->getSceneNode("nCam")->attachObject(camRef);
+	
 
-	//MovablePlane* mp = new MovablePlane("Plane");
-	//mPlane->attachObject(mp);
-	//camRef->enableReflection(mp);
-	//camRef->enableCustomNearClipPlane(mp);
+	MovablePlane* mp = new MovablePlane(Plane(Vector3::UNIT_Y,-0.1));
+	mPlane->attachObject(mp);
+	camRef->enableReflection(mp);
+	camRef->enableCustomNearClipPlane(mp);
 
-	//
-	//TexturePtr rttTex = TextureManager::getSingleton().createManual(
-	//	"texRtt", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	//	TEX_TYPE_2D, (Real)camRef->getViewport()->getActualWidth(),
-	//	(Real)camRef->getViewport()->getActualHeight(),
-	//	0, PF_R8G8B8, TU_RENDERTARGET);	//RenderTexture* renderTexture = rttTex->getBuffer()->getRenderTarget();
-	//Viewport * vpt = renderTexture->addViewport(camRef);
-	//vpt->setClearEveryFrame(true);
-	//vpt->setBackgroundColour(ColourValue::Black);	//	//TextureUnitState* tu = ent1->getSubEntities[0]->getMaterial()->
-	//	getTechniques[0]->getPasses[0]->
-	//	createTextureUnitState("texRtt");
-	//tu->setColourOperation(LBO_MODULATE);
-	//tu->setTextureAddressingMode(TextureUnitState::TAM_CLAMP);
-	//tu->setProjectiveTexturing(true, mPlane->getCreator()->getCamera("RefCam"));
+	
+	TexturePtr rttTex = TextureManager::getSingleton().createManual(
+		"texRtt", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		TEX_TYPE_2D, (Real)mPlane->getCreator()->getCamera("Cam")->getViewport()->getActualWidth(),
+		(Real)mPlane->getCreator()->getCamera("Cam")->getViewport()->getActualHeight(),
+		0, PF_R8G8B8, TU_RENDERTARGET);
+
+	renderTexture = rttTex->getBuffer()->getRenderTarget();
+	Viewport * vpt = renderTexture->addViewport(camRef);
+	vpt->setClearEveryFrame(true);
+	vpt->setBackgroundColour(ColourValue::Black);
+
+	
+
+	TextureUnitState* tu = ent1->getSubEntities()[0]->getMaterial()->
+		getTechniques()[0]->getPasses()[0]->
+		createTextureUnitState("texRtt");
+	tu->setColourOperation(LBO_ADD);
+	tu->setTextureAddressingMode(TextureUnitState::TAM_CLAMP);
+	tu->setProjectiveTexturing(true, camRef);
+
+	renderTexture->addListener(this);
 	
 
 	
@@ -55,4 +64,8 @@ PlaneObject::PlaneObject(Ogre::SceneNode* sPlane): Objects(sPlane)
 
 PlaneObject::~PlaneObject()
 {
+
+	renderTexture->removeListener(this); // en la destructora
+	delete renderTexture;
+	renderTexture = nullptr;
 }
