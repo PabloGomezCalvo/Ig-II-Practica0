@@ -15,6 +15,8 @@ protected:
 	AnimationState* RunBaseState = nullptr; //CORRER EN LA BASE
 	MovableObject* espadaR = nullptr;
 	MovableObject* espadaL = nullptr;
+	AnimationState * animationState = nullptr;
+	AnimationState * animationStaterot = nullptr;
 	bool correr = false;
 };
 
