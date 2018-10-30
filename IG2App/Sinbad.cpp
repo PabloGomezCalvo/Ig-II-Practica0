@@ -10,13 +10,13 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 
 	mSinbadNode->attachObject(ent);
 
-
-	mSinbadNode->setPosition(400, 100, -300);
+	
 	mSinbadNode->setScale(20, 20, 20);
 	mSinbadNode->yaw(Ogre::Degree(-45));
 	mSinbadNode->showBoundingBox(true);
 	mSinbadNode->setOrientation(Ogre::Quaternion(1, 0, 0, 0));
 	mSinbadNode->setInitialState();
+
 
 	//mSinbadNode->setVisible(false);
 
@@ -48,18 +48,18 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 	RunBaseState = ent->getAnimationState("RunBase");
 	RunBaseState->setLoop(true);
 	RunBaseState->setEnabled(false);
-	int duracion = 15;
+	int duracion = 24;
 	Animation* animation = mSinbadNode->getCreator()->createAnimation("correr", duracion);
 	animation->setInterpolationMode(Ogre::Animation::IM_LINEAR);
 	NodeAnimationTrack * track = animation->createNodeTrack(0);
 	track->setAssociatedNode(mSinbadNode);
-	Vector3 keyframePosini(0, 0, 0);
-	/*Vector3 dest(0.5, 0, 0.5);
-	Vector3 src(mSinbadNode->getPosition());
-	Ogre::Quaternion quat = src.getRotationTo(dest);*/
-	Real longitudPaso = duracion / 4.0;
+	Vector3 keyframePosini(400, 100, -300);
+	
+	Real longitudPaso = 20 / 4.0;
+	Real longitudRot = 4 / 4;
+	Real pasoActual = 0;
 	TransformKeyFrame * kf;
-	TransformKeyFrame * kfRot;
+	
 
 	//kf0
 	kf = track->createNodeKeyFrame(0);
@@ -68,32 +68,51 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 
 
 	//kf1
-	kf = track->createNodeKeyFrame(longitudPaso * 1); // Keyframe 1: arriba
+	pasoActual += longitudPaso;
+	kf = track->createNodeKeyFrame(pasoActual); // Keyframe 1: arriba
 	keyframePosini += Ogre::Vector3::UNIT_Z * 550.0;
-	//mSinbadNode->setOrientation(Ogre::Quaternion(0.5, 0, -0.5, 0));
 	kf->setTranslate(keyframePosini); // Arriba
-	//kf->setRotation(quat);
-
-
-
+	
 	//kf2
-
-	kf = track->createNodeKeyFrame(longitudPaso * 2);
-	keyframePosini += Ogre::Vector3::UNIT_X * -800.0;
-
-	//kf->setRotation(Ogre::Quaternion(0.5, 0, -0.5, 0));
+	pasoActual += longitudRot;
+	kf = track->createNodeKeyFrame(pasoActual);
+	kf->setRotation(Ogre::Quaternion(Degree(-90), Vector3(0,1,0)));
 	kf->setTranslate(keyframePosini);
 
 	//kf3
-
-	kf = track->createNodeKeyFrame(longitudPaso * 3);
-	keyframePosini += Ogre::Vector3::UNIT_Z * -550.0;
+	pasoActual += longitudPaso;
+	kf = track->createNodeKeyFrame(pasoActual);
+	kf->setRotation(Quaternion(Degree(-90), Vector3(0, 1, 0)));
+	keyframePosini += Ogre::Vector3::UNIT_X * -800.0;
 	kf->setTranslate(keyframePosini);
 
 	//kf4
+	pasoActual += longitudRot;
+	kf = track->createNodeKeyFrame(pasoActual);
+	kf->setRotation(Quaternion(Degree(180), Vector3(0, 1, 0)));
+	kf->setTranslate(keyframePosini);
 
-	kf = track->createNodeKeyFrame(longitudPaso * 4);
+	//KF5
+	pasoActual += longitudPaso;
+	kf = track->createNodeKeyFrame(pasoActual);
+	keyframePosini += Ogre::Vector3::UNIT_Z * -550.0;
+	kf->setRotation(Quaternion(Degree(180), Vector3(0, 1, 0)));
+	kf->setTranslate(keyframePosini);
+	//KF6
+	pasoActual += longitudRot;
+	kf = track->createNodeKeyFrame(pasoActual);
+	kf->setRotation(Quaternion(Degree(90), Vector3(0, 1, 0)));
+	kf->setTranslate(keyframePosini);
+	//KF7
+	pasoActual += longitudPaso;
+	kf = track->createNodeKeyFrame(pasoActual);
 	keyframePosini += Ogre::Vector3::UNIT_X * 800.0;
+	kf->setRotation(Quaternion(Degree(90), Vector3(0, 1, 0)));
+	kf->setTranslate(keyframePosini);
+	//KF8
+	pasoActual += longitudRot;
+	kf = track->createNodeKeyFrame(pasoActual);
+	kf->setRotation(Quaternion(Degree(0), Vector3(0, 1, 0)));
 	kf->setTranslate(keyframePosini);
 
 	animationState = mSinbadNode->getCreator()->createAnimationState("correr");
@@ -104,9 +123,19 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 }
 
 void Sinbad::frameRendered(const Ogre::FrameEvent& evt) {
-	animDance->addTime(evt.timeSinceLastFrame);
-	RunBaseState->addTime(evt.timeSinceLastFrame);
-	animationState->addTime(evt.timeSinceLastFrame);
+	if (!bomba) {
+		animDance->addTime(evt.timeSinceLastFrame);
+		RunBaseState->addTime(evt.timeSinceLastFrame);
+		animationState->addTime(evt.timeSinceLastFrame);
+		RunTopState->addTime(evt.timeSinceLastFrame);
+		std::cout << mSinbadNode->getPosition() << std::endl;
+	}
+	else {
+		eBomb->addTime(evt.timeSinceLastFrame);
+		std::cout << mSinbadNode->getPosition() << std::endl;
+
+
+	}
 
 }
 
@@ -127,7 +156,51 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt) {
 
 	}
 		break;
+	case SDLK_b:
+	{
+		bomba = true;
+		
+		Quaternion antes = mSinbadNode->getOrientation();
+		mSinbadNode->lookAt(Vector3(mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition().x, mSinbadNode->getPosition().y, mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition().z),
+			Node::TS_WORLD
+		);
+		mSinbadNode->rotate(Quaternion(Degree(180), Vector3::UNIT_Y));
+		Quaternion despues = mSinbadNode->getOrientation();
 
+		mSinbadNode->setOrientation(antes);
+
+
+		Real duracion = 8;
+		Animation * animationBomb = mSinbadNode->getCreator()->createAnimation("animSinbadBomb", duracion);
+		NodeAnimationTrack * track = animationBomb->createNodeTrack(0);
+		track->setAssociatedNode(mSinbadNode->getCreator()->getSceneNode("Sinbad"));
+
+		Vector3 keyframePos(mSinbadNode->getPosition());
+		TransformKeyFrame * kf;
+
+		kf = track->createNodeKeyFrame(0);
+		kf->setRotation(antes);
+		kf->setTranslate(mSinbadNode->getPosition());
+
+		kf = track->createNodeKeyFrame(duracion / 2);
+
+		Vector3 mDirection = mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition() - mSinbadNode->getPosition();
+
+		Ogre::Vector3 src = mSinbadNode->getOrientation() * Ogre::Vector3::UNIT_X;
+		Ogre::Quaternion quat = src.getRotationTo(mDirection, mSinbadNode->getOrientation().yAxis());
+		kf->setRotation(despues);
+		kf->setTranslate(mSinbadNode->getPosition());
+
+		kf = track->createNodeKeyFrame(duracion);
+		kf->setRotation(mSinbadNode->getOrientation());
+		kf->setRotation(despues);
+		kf->setTranslate(Vector3(mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition()));
+
+		eBomb = mSinbadNode->getCreator()->createAnimationState("animSinbadBomb");
+		eBomb->setLoop(false);
+		eBomb->setEnabled(true);
+	}
+			break;
 
 	default:
 		break;

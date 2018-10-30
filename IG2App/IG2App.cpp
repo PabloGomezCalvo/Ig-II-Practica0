@@ -120,6 +120,7 @@ void IG2App::setupScene(void)
 
   
   mSinbadNode = mPlaneNode->createChildSceneNode("Sinbad");
+
   sinbad = new Sinbad(mSinbadNode);
 
   addInputListener(sinbad);

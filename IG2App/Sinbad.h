@@ -16,7 +16,8 @@ protected:
 	MovableObject* espadaR = nullptr;
 	MovableObject* espadaL = nullptr;
 	AnimationState * animationState = nullptr;
-	AnimationState * animationStaterot = nullptr;
+	AnimationState * eBomb = nullptr;
 	bool correr = false;
+	bool bomba = false;
 };
 
