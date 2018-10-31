@@ -15,9 +15,10 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 	mSinbadNode->yaw(Ogre::Degree(-45));
 	mSinbadNode->showBoundingBox(true);
 	mSinbadNode->setOrientation(Ogre::Quaternion(1, 0, 0, 0));
+	mSinbadNode->setPosition(400, 100, -300);
+
 	mSinbadNode->setInitialState();
-
-
+	
 	//mSinbadNode->setVisible(false);
 
 	AnimationStateSet * aux = ent->getAllAnimationStates();
@@ -53,7 +54,7 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 	animation->setInterpolationMode(Ogre::Animation::IM_LINEAR);
 	NodeAnimationTrack * track = animation->createNodeTrack(0);
 	track->setAssociatedNode(mSinbadNode);
-	Vector3 keyframePosini(400, 100, -300);
+	Vector3 keyframePosini(0, 0, 0);
 	
 	Real longitudPaso = 20 / 4.0;
 	Real longitudRot = 4 / 4;
@@ -132,6 +133,7 @@ void Sinbad::frameRendered(const Ogre::FrameEvent& evt) {
 	}
 	else {
 		eBomb->addTime(evt.timeSinceLastFrame);
+		RunBaseState->addTime(evt.timeSinceLastFrame);
 		std::cout << mSinbadNode->getPosition() << std::endl;
 
 
@@ -160,41 +162,39 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	{
 		bomba = true;
 		
-		Quaternion antes = mSinbadNode->getOrientation();
-		mSinbadNode->lookAt(Vector3(mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition().x, mSinbadNode->getPosition().y, mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition().z),
-			Node::TS_WORLD
-		);
-		mSinbadNode->rotate(Quaternion(Degree(180), Vector3::UNIT_Y));
-		Quaternion despues = mSinbadNode->getOrientation();
-
-		mSinbadNode->setOrientation(antes);
-
-
+	
+		
+	
 		Real duracion = 8;
 		Animation * animationBomb = mSinbadNode->getCreator()->createAnimation("animSinbadBomb", duracion);
 		NodeAnimationTrack * track = animationBomb->createNodeTrack(0);
-		track->setAssociatedNode(mSinbadNode->getCreator()->getSceneNode("Sinbad"));
+		track->setAssociatedNode(mSinbadNode);
 
-		Vector3 keyframePos(mSinbadNode->getPosition());
+		Vector3 keyframePos(0,0,0);
 		TransformKeyFrame * kf;
 
+		
+		Vector3 dest(-1, 0, 0);
+		Ogre::Vector3 src(0,0,1);
+		Ogre::Quaternion quat = src.getRotationTo(dest);
+		
+		//KF0
 		kf = track->createNodeKeyFrame(0);
-		kf->setRotation(antes);
-		kf->setTranslate(mSinbadNode->getPosition());
+		
+		kf->setRotation(quat);
+		kf->setTranslate(keyframePos);
 
+		//KF1
 		kf = track->createNodeKeyFrame(duracion / 2);
+        kf->setRotation(quat);
+		keyframePos -= Ogre::Vector3::UNIT_Z * mSinbadNode->getPosition().z;
+		keyframePos -= Ogre::Vector3::UNIT_X * mSinbadNode->getPosition().x;
+		kf->setTranslate(keyframePos);
 
-		Vector3 mDirection = mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition() - mSinbadNode->getPosition();
-
-		Ogre::Vector3 src = mSinbadNode->getOrientation() * Ogre::Vector3::UNIT_X;
-		Ogre::Quaternion quat = src.getRotationTo(mDirection, mSinbadNode->getOrientation().yAxis());
-		kf->setRotation(despues);
-		kf->setTranslate(mSinbadNode->getPosition());
-
+		//KF2
 		kf = track->createNodeKeyFrame(duracion);
-		kf->setRotation(mSinbadNode->getOrientation());
-		kf->setRotation(despues);
-		kf->setTranslate(Vector3(mSinbadNode->getCreator()->getSceneNode("nBomb")->getPosition()));
+		kf->setRotation(quat);
+		kf->setTranslate(keyframePos);
 
 		eBomb = mSinbadNode->getCreator()->createAnimationState("animSinbadBomb");
 		eBomb->setLoop(false);
