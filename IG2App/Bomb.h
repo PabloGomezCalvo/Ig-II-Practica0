@@ -11,6 +11,7 @@ public:
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	AnimationState * animationState = nullptr;
+	ParticleSystem* psys = nullptr;
 	~Bomb();
 };
 

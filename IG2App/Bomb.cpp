@@ -12,6 +12,10 @@ Bomb::Bomb(Ogre::SceneNode* Bnode) : Objects(Bnode)
 	mBomb->setPosition(Vector3(0, 25, 0));
 	ent->setMaterialName("IG2App/Bomb");
 	mBomb->setInitialState();
+
+	psys = mBomb->getCreator()->createParticleSystem("parSys", "Smoke");
+	mBomb->attachObject(psys);
+	psys->setEmitting(false);
 	
 	int duracion = 4;
 	Animation* animation = mBomb->getCreator()->createAnimation("animacionvaiven", duracion);
@@ -57,7 +61,7 @@ Bomb::Bomb(Ogre::SceneNode* Bnode) : Objects(Bnode)
 
 void Bomb::frameRendered(const Ogre::FrameEvent& evt) {
 	animationState->addTime(evt.timeSinceLastFrame);
-	
+	psys->getEmitter(0)->setPosition(mBomb->getPosition());
 
 };
 
@@ -65,7 +69,7 @@ bool Bomb::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	switch (evt.keysym.sym)
 	{
 	case SDLK_b:
-		
+		psys->setEmitting(true);
 		break;
 	default:
 		break;
