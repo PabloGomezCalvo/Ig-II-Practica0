@@ -6,7 +6,7 @@
 Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 {
 	mSinbadNode = sSinbad;
-	Ogre::Entity* ent = mSinbadNode->getCreator()->createEntity("Sinbad.mesh");
+	ent = mSinbadNode->getCreator()->createEntity("Sinbad.mesh");
 
 	mSinbadNode->attachObject(ent);
 
@@ -39,16 +39,16 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 	ent->attachObjectToBone("Handle.R", espadaR);
 
 	animDance = ent->getAnimationState("Dance");
-	animDance->setEnabled(true);
+	animDance->setEnabled(false);
 	animDance->setLoop(true);
-
+	//caminando
 	RunTopState = ent->getAnimationState("RunTop");
 	RunTopState->setLoop(true);
 	RunTopState->setEnabled(false);
-
+	//corriendo
 	RunBaseState = ent->getAnimationState("RunBase");
 	RunBaseState->setLoop(true);
-	RunBaseState->setEnabled(false);
+	RunBaseState->setEnabled(true);
 	int duracion = 24;
 	Animation* animation = mSinbadNode->getCreator()->createAnimation("correr", duracion);
 	animation->setInterpolationMode(Ogre::Animation::IM_LINEAR);
@@ -117,27 +117,55 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 	kf->setTranslate(keyframePosini);
 
 	animationState = mSinbadNode->getCreator()->createAnimationState("correr");
-	animationState->setLoop(true);
+	animationState->setLoop(false);
 	animationState->setEnabled(true);
 
 
 }
 
 void Sinbad::frameRendered(const Ogre::FrameEvent& evt) {
-	if (!bomba) {
-		animDance->addTime(evt.timeSinceLastFrame);
-		RunBaseState->addTime(evt.timeSinceLastFrame);
-		animationState->addTime(evt.timeSinceLastFrame);
-		RunTopState->addTime(evt.timeSinceLastFrame);
-		//std::cout << mSinbadNode->getPosition() << std::endl;
-	}
+
+	if(muerto)
+		mSinbadNode->translate(Ogre::Vector3(0.0f, 0.0f, -0.3f));
 	else {
-		eBomb->addTime(evt.timeSinceLastFrame);
-		RunBaseState->addTime(evt.timeSinceLastFrame);
-		//std::cout << mSinbadNode->getPosition() << std::endl;
+
+		if (!bomba) {
+			animDance->addTime(evt.timeSinceLastFrame);
+			RunBaseState->addTime(evt.timeSinceLastFrame);
+			if (correr)
+				animationState->addTime(evt.timeSinceLastFrame);
+
+			RunTopState->addTime(evt.timeSinceLastFrame);
+			//std::cout << mSinbadNode->getPosition() << std::endl;
+		}
+		else {
+
+			if (eBomb->hasEnded()) {
+				RunBaseState->setEnabled(false);
+				animDance->setEnabled(false);
+				animationState->setEnabled(false);
+				eBomb->setEnabled(false);
 
 
+				//Tumbamos a Sinbad
+				mSinbadNode->rotate(Ogre::Vector3(1.0f, 0.0f, 0.0f), Ogre::Radian(3.14 / 2));
+				mSinbadNode->rotate(Ogre::Vector3(0.0f, 1.0f, 0.0f), Ogre::Radian(3.14));
+				mSinbadNode->translate(Ogre::Vector3(0.0f, -4.0f, 0.0f));
+				muerto = true;
+			}
+			else if (!muerto) {
+
+				eBomb->addTime(evt.timeSinceLastFrame);
+				RunBaseState->addTime(evt.timeSinceLastFrame);
+
+			}
+			//std::cout << mSinbadNode->getPosition() << std::endl;
+
+
+		}
 	}
+
+	
 
 }
 
@@ -146,21 +174,27 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	switch (evt.keysym.sym)
 	{
 	case SDLK_r:
-		if (!correr) {
-			animDance->setEnabled(false);
-			RunBaseState->setEnabled(true);
-			correr = true;
-	}
-		else {
-			animDance->setEnabled(true);
-			RunBaseState->setEnabled(false);
-			correr = false;
+		if (!muerto) {
+			if (!correr) {
+				animDance->setEnabled(false);
+				RunBaseState->setEnabled(true);
+				correr = true;
+			}
+			else {
+				animDance->setEnabled(true);
+				RunBaseState->setEnabled(false);
+				animationState->setEnabled(true);
+				correr = false;
 
-	}
+			}
+		}
+		
 		break;
 	case SDLK_b:
 	{
 		bomba = true;
+		
+		
 		
 	
 		

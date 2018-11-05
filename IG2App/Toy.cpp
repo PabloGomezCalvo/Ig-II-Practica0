@@ -7,7 +7,9 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	//mToyNode = sToy->getCreator()->getSceneNode("nPlane")->createChildSceneNode("nToy");
 
 	cuello = sToy;
-	cuello->setPosition(0, 100, 0);
+	cuello->setPosition(150, 100, 30);
+	cuello->rotate(Ogre::Vector3(0.0f, 1.0f, 0.0f), Ogre::Radian(3.14));
+	cuello->showBoundingBox(true);
 	
 
 	cabeza = cuello->createChildSceneNode("nCabeza");

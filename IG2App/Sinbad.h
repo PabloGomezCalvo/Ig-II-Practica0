@@ -17,7 +17,9 @@ protected:
 	MovableObject* espadaL = nullptr;
 	AnimationState * animationState = nullptr;
 	AnimationState * eBomb = nullptr;
-	bool correr = false;
+	bool correr = true;
 	bool bomba = false;
+	bool muerto = false;
+	Ogre::Entity* ent = nullptr;
 };
 

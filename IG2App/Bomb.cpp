@@ -6,7 +6,7 @@ Bomb::Bomb(Ogre::SceneNode* Bnode) : Objects(Bnode)
 {
 	mBomb = Bnode;
 	ent = mBomb->getCreator()->createEntity("Bomb", "uv_sphere.mesh");
-	
+	mBomb->showBoundingBox(true);
 	mBomb->scale(Vector3(0.3, 0.3, 0.3));
 	mBomb->attachObject(ent);
 	mBomb->setPosition(Vector3(0, 25, 0));

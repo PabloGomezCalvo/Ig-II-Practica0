@@ -1,23 +1,15 @@
-﻿  Sinbad.cpp
-c:\users\maria\desktop\ogre_ig2\ig-ii-practica0\ogresdk\include\ogre\ogrehardwarebuffer.h(180): warning C4251: 'Ogre::HardwareBuffer::mShadowBuffer': class 'std::unique_ptr<Ogre::HardwareBuffer,std::default_delete<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Ogre::HardwareBuffer'
-          with
-          [
-              _Ty=Ogre::HardwareBuffer
-          ]
-  c:\users\maria\desktop\ogre_ig2\ig-ii-practica0\ogresdk\include\ogre\ogrehardwarebuffer.h(180): note: vea la declaración de 'std::unique_ptr<Ogre::HardwareBuffer,std::default_delete<_Ty>>'
-          with
-          [
-              _Ty=Ogre::HardwareBuffer
-          ]
-c:\users\maria\desktop\ogre_ig2\ig-ii-practica0\ogresdk\include\ogre\ogretexturemanager.h(409): warning C4251: 'Ogre::TextureManager::mWarningTexture': class 'Ogre::SharedPtr<Ogre::Texture>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Ogre::TextureManager'
-  c:\users\maria\desktop\ogre_ig2\ig-ii-practica0\ogresdk\include\ogre\ogreprerequisites.h(303): note: vea la declaración de 'Ogre::SharedPtr<Ogre::Texture>'
-c:\users\maria\desktop\ogre_ig2\ig-ii-practica0\ogresdk\include\ogre\ogretimer.h(41): warning C4251: 'Ogre::Timer::start': class 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Ogre::Timer'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\chrono(795): note: vea la declaración de 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>'
-c:\users\maria\desktop\ogre_ig2\ig-ii-practica0\ig2app\sinbad.cpp(53): warning C4244: 'argumento': conversión de 'int' a 'Ogre::Real'; posible pérdida de datos
+﻿  Bomb.cpp
+e:\pablo universidad\prácticas\ig ii\ig-ii-practica0\ogresdk\include\ogre\ogretexturemanager.h(409): warning C4251: 'Ogre::TextureManager::mWarningTexture': class 'Ogre::SharedPtr<Ogre::Texture>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Ogre::TextureManager'
+  e:\pablo universidad\prácticas\ig ii\ig-ii-practica0\ogresdk\include\ogre\ogreprerequisites.h(303): note: vea la declaración de 'Ogre::SharedPtr<Ogre::Texture>'
+e:\pablo universidad\prácticas\ig ii\ig-ii-practica0\ogresdk\include\ogre\ogretimer.h(41): warning C4251: 'Ogre::Timer::start': class 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Ogre::Timer'
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.15.26726\include\chrono(795): note: vea la declaración de 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>'
+e:\pablo universidad\prácticas\ig ii\ig-ii-practica0\ig2app\bomb.cpp(10): warning C4305: 'argumento': truncamiento de 'double' a 'const Ogre::Real'
+e:\pablo universidad\prácticas\ig ii\ig-ii-practica0\ig2app\bomb.cpp(21): warning C4244: 'argumento': conversión de 'int' a 'Ogre::Real'; posible pérdida de datos
+e:\pablo universidad\prácticas\ig ii\ig-ii-practica0\ig2app\bomb.cpp(28): warning C4244: 'inicializando': conversión de 'double' a 'Ogre::Real'; posible pérdida de datos
   Generando código
-  1 of 817 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 819 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-SDL2main.lib(SDL_windows_main.obj) : warning LNK4099: no se encontró PDB 'SDL2main.pdb' con 'SDL2main.lib(SDL_windows_main.obj)' o en 'C:\Users\Maria\Desktop\Ogre_IG2\Ig-II-Practica0\bin\SDL2main.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  IG2App.vcxproj -> C:\Users\Maria\Desktop\Ogre_IG2\Ig-II-Practica0\bin\IG2AppRelease.exe
+SDL2main.lib(SDL_windows_main.obj) : warning LNK4099: no se encontró PDB 'SDL2main.pdb' con 'SDL2main.lib(SDL_windows_main.obj)' o en 'E:\Pablo Universidad\Prácticas\IG II\Ig-II-Practica0\bin\SDL2main.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  IG2App.vcxproj -> E:\Pablo Universidad\Prácticas\IG II\Ig-II-Practica0\bin\IG2AppRelease.exe
