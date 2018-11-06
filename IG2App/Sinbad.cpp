@@ -1,4 +1,4 @@
-#include "Sinbad.h"
+﻿#include "Sinbad.h"
 #include <iostream>
 #include <Ogre.h>
 
@@ -125,8 +125,13 @@ Sinbad::Sinbad(Ogre::SceneNode* sSinbad): Objects(sSinbad)
 
 void Sinbad::frameRendered(const Ogre::FrameEvent& evt) {
 
+
+
+	
+	
 	if(muerto)
 		mSinbadNode->translate(Ogre::Vector3(0.0f, 0.0f, -0.3f));
+
 	else {
 
 		if (!bomba) {
@@ -139,6 +144,7 @@ void Sinbad::frameRendered(const Ogre::FrameEvent& evt) {
 			//std::cout << mSinbadNode->getPosition() << std::endl;
 		}
 		else {
+
 
 			if (eBomb->hasEnded()) {
 				RunBaseState->setEnabled(false);

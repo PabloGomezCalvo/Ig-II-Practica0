@@ -11,11 +11,12 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	cuello->rotate(Ogre::Vector3(0.0f, 1.0f, 0.0f), Ogre::Radian(3.14));
 	cuello->showBoundingBox(true);
 	
+	
 
 	cabeza = cuello->createChildSceneNode("nCabeza");
 	Ogre::Entity* eCabeza = cuello->getCreator()->createEntity("sphere.mesh");
 	cabeza->attachObject(eCabeza);
-
+	
 	cabeza->setPosition(0, 150, 0);
 	cabeza->setScale(0.6, 0.6, 0.6);
 
@@ -28,9 +29,9 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	nariz->setScale(0.1, 0.1, 0.1);
 
 	cuerpo = cuello->createChildSceneNode("nCuerpo");
-	Ogre::Entity* eCuerpo = cuello->getCreator()->createEntity("sphere.mesh");
+	eCuerpo = cuello->getCreator()->createEntity("sphere.mesh");
 	cuerpo->attachObject(eCuerpo);
-
+	
 
 
 	ombligo = cuerpo->createChildSceneNode("nOmbligo");

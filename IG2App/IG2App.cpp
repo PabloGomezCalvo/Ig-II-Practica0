@@ -1,4 +1,4 @@
-#include "IG2App.h"
+﻿#include "IG2App.h"
 
 
 
@@ -135,6 +135,11 @@ void IG2App::setupScene(void)
   addInputListener(bomb);
  
    
+
+  AxisAlignedBox aabb = bomb->getWorldBoundingBox();
+  Sphere sphere = movableObject ‐ > getWorldBoundingSphere();
+  aabb.intersects(Sphere | AABB | Plane | Point);
+  sphere.intersects(Sphere | AABB | Plane | Point);
   
   //-------------------------------------------------------------------------
 
