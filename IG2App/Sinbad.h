@@ -6,7 +6,16 @@ public:
 	Sinbad(Ogre::SceneNode* sSinbad);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void receiveEvent(TipoEvent evnt) 
+	{
+		bomba = true;
+		bomb();
+	};
 
+	Ogre::Entity* getEntity() {
+		return ent;
+	}
+	void bomb();
 	virtual ~Sinbad();
 protected:
 	Ogre::SceneNode* mSinbadNode = nullptr;
@@ -18,8 +27,11 @@ protected:
 	AnimationState * animationState = nullptr;
 	AnimationState * eBomb = nullptr;
 	bool correr = true;
+	bool toyChocado = false;
 	bool bomba = false;
 	bool muerto = false;
 	Ogre::Entity* ent = nullptr;
+
+
 };
 

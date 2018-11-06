@@ -7,7 +7,7 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	//mToyNode = sToy->getCreator()->getSceneNode("nPlane")->createChildSceneNode("nToy");
 
 	cuello = sToy;
-	cuello->setPosition(150, 100, 30);
+	cuello->setPosition(300, 100, 0);
 	cuello->rotate(Ogre::Vector3(0.0f, 1.0f, 0.0f), Ogre::Radian(3.14));
 	cuello->showBoundingBox(true);
 	
@@ -31,11 +31,14 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	cuerpo = cuello->createChildSceneNode("nCuerpo");
 	eCuerpo = cuello->getCreator()->createEntity("sphere.mesh");
 	cuerpo->attachObject(eCuerpo);
+
+	//cuerpo->showBoundingBox(true);
+	
 	
 
 
 	ombligo = cuerpo->createChildSceneNode("nOmbligo");
-	Ogre::Entity* eOmbligo = cuello->getCreator()->createEntity("sphere.mesh");
+	eOmbligo = cuello->getCreator()->createEntity("sphere.mesh");
 	ombligo->attachObject(eOmbligo);
 
 	ombligo->setPosition(0, 0, -100);
@@ -47,11 +50,19 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 }
 void Toy::frameRendered(const Ogre::FrameEvent& evt) {
 
-	if (!parado) {
-		
-		cuello->translate(0, 0, 30*evt.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-		cuerpo->rotate(Ogre::Vector3(30 * evt.timeSinceLastFrame, 0, 0), Ogre::Radian(0.05f));
-		cabeza->rotate(Ogre::Vector3(0, 30 * evt.timeSinceLastFrame, 0), Ogre::Radian(0.01f));
+	if (eOmbligo->getWorldBoundingSphere().intersects(cuello->getCreator()->getEntity("Bomb")->getBoundingBox())) {
+		fireAppEvent(TipoEvent::MUERTE);
+		cuello->setVisible(false);
+	}
+	else {
+
+		if (!parado) {
+
+			cuello->translate(0, 0, 30 * evt.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+			cuerpo->rotate(Ogre::Vector3(30 * evt.timeSinceLastFrame, 0, 0), Ogre::Radian(0.05f));
+			cabeza->rotate(Ogre::Vector3(0, 30 * evt.timeSinceLastFrame, 0), Ogre::Radian(0.01f));
+		}
+
 	}
 
 }

@@ -132,6 +132,7 @@
     <ClCompile Include="IG2ApplicationContext.cpp" />
     <ClCompile Include="IG2Main.cpp" />
     <ClCompile Include="IG2App.cpp" />
+    <ClCompile Include="Objects.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Sinbad.cpp" />
     <ClCompile Include="Toy.cpp" />

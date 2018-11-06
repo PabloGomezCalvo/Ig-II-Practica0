@@ -4,6 +4,7 @@
 
 Bomb::Bomb(Ogre::SceneNode* Bnode) : Objects(Bnode)
 {
+	addAppListener(this);
 	mBomb = Bnode;
 	ent = mBomb->getCreator()->createEntity("Bomb", "uv_sphere.mesh");
 	mBomb->showBoundingBox(true);

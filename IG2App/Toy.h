@@ -8,11 +8,10 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
-
-	public AxisAlignedBox:: getBBox() {
-
-		return eCuerpo->getBoundingBox();
+	Ogre::Entity* getEntity() {
+		return eOmbligo;
 	}
+
 	~Toy();
 protected:
 	Ogre::SceneNode* mToyNode = nullptr;
@@ -22,6 +21,7 @@ protected:
 	Ogre::SceneNode* ombligo = nullptr;
 	Ogre::SceneNode* cuerpo = nullptr;
 	Ogre::Entity* eCuerpo = nullptr;
+	Ogre::Entity* eOmbligo = nullptr;
 
 	bool parado = true;
 

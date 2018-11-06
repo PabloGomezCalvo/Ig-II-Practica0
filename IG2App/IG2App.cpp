@@ -1,5 +1,5 @@
 ﻿#include "IG2App.h"
-
+#include <iostream>
 
 
 
@@ -14,6 +14,16 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   else if (evt.keysym.sym == SDLK_p) {
 	  mPlaneNode->rotate(Ogre::Vector3(1, 0, 0), Ogre::Radian(3.14 / 4));
   }
+  else if (evt.keysym.sym == SDLK_c) {
+	  if(!targetSinbad)
+	  mCamMgr->setTarget(mSinbadNode); 
+	  else
+		  mCamMgr->setTarget(mSinbadNode->getParentSceneNode());
+
+	  targetSinbad = !targetSinbad;
+  
+  }
+  
   
   return true;
 }
@@ -135,11 +145,9 @@ void IG2App::setupScene(void)
   addInputListener(bomb);
  
    
+  
 
-  AxisAlignedBox aabb = bomb->getWorldBoundingBox();
-  Sphere sphere = movableObject ‐ > getWorldBoundingSphere();
-  aabb.intersects(Sphere | AABB | Plane | Point);
-  sphere.intersects(Sphere | AABB | Plane | Point);
+
   
   //-------------------------------------------------------------------------
 

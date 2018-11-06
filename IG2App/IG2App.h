@@ -42,7 +42,8 @@ protected:
 
   OgreBites::CameraMan* mCamMgr = nullptr;
 
- 
+  bool targetSinbad = false;
+
 };
 
 #endif
