@@ -143,9 +143,9 @@ void IG2App::setupScene(void)
   bomb = new Bomb(mBombNode);
 
   addInputListener(bomb);
- 
    
-  
+  mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20),
+	  "IG2App/ejemploShadersLM", 1, 1, true, 0.0, 100, 100);
 
 
   

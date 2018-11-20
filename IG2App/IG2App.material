@@ -1,0 +1,103 @@
+material IG2App/plano
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.1 0.1 0.1
+			scene_blend add
+			depth_write off
+			cull_software none
+			cull_hardware none
+
+			texture_unit
+			{
+				texture Water01.jpg
+				scroll_anim 0.125 0
+			}
+
+			texture_unit
+			{
+				texture Water01.jpg
+				wave_xform scroll_y sine 0 0.1 0 0.25
+			}
+		}
+	}
+}
+
+
+
+
+material IG2App/Bomb
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.75 0.75 0.75
+
+			texture_unit
+			{
+				texture BumpyMetal.jpg
+			}
+		}
+	}
+}
+
+material IG2App/Smoke
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend alpha_blend
+			depth_write off
+			diffuse vertexcolour
+
+			texture_unit
+			{
+				texture smoke.png
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material IG2App/ejemploShadersLM
+{
+	technique 
+	{
+	pass 
+	{
+		depth_write off
+		vertex_program vertexShaderLMglsl glsl
+		{ 
+		source vertexShaderLMglsl.txt// archivo código vertex shader
+        default_params // valores para las variables uniform
+           {
+           param_named_auto modelViewProjMat worldviewproj_matrix
+          }
+		}
+		fragment_program fragmentShaderLMglsl
+		{
+		source fragmentShaderLMglsl.txt // archivo código fragment shader
+		default_params // valores para las variables uniform
+			{
+			param_named InColor float4 0.5 0.5 1.0 1.0
+			param_named OutColor1 float4 0.5 0.25 1.0 1.0
+			param_named OutColor2 float4 1.0 0.5 0.25 1.0
+			}
+		}
+		texture_unit texture1 {
+		texture 1d_debug.png 2d // archivo
+		tex_address_mode clamp
+		filtering bilinear
+	}
+	texture_unit texture2{
+	texture flare.png 2d // archivo
+	tex_address_mode wrap
+	}
+} 
+}
+}
