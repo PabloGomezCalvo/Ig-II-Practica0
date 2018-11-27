@@ -1,1 +1,8 @@
-﻿
+﻿  Bomb.cpp
+c:\hlocal\ig-ii-practica0\ogresdk\include\ogre\ogretexturemanager.h(409): warning C4251: 'Ogre::TextureManager::mWarningTexture': class 'Ogre::SharedPtr<Ogre::Texture>' needs to have dll-interface to be used by clients of class 'Ogre::TextureManager'
+  c:\hlocal\ig-ii-practica0\ogresdk\include\ogre\ogreprerequisites.h(303): note: see declaration of 'Ogre::SharedPtr<Ogre::Texture>'
+c:\hlocal\ig-ii-practica0\ogresdk\include\ogre\ogretimer.h(41): warning C4251: 'Ogre::Timer::start': class 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' needs to have dll-interface to be used by clients of class 'Ogre::Timer'
+  c:\software\programacion\msvstudio2017\vc\tools\msvc\14.15.26726\include\chrono(795): note: see declaration of 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>'
+c:\hlocal\ig-ii-practica0\ig2app\bomb.cpp(11): warning C4305: 'argument': truncation from 'double' to 'const Ogre::Real'
+c:\hlocal\ig-ii-practica0\ig2app\bomb.cpp(22): warning C4244: 'argument': conversion from 'int' to 'Ogre::Real', possible loss of data
+c:\hlocal\ig-ii-practica0\ig2app\bomb.cpp(29): warning C4244: 'initializing': conversion from 'double' to 'Ogre::Real', possible loss of data
