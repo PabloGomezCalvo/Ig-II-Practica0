@@ -19,7 +19,7 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	
 	cabeza->setPosition(0, 150, 0);
 	cabeza->setScale(0.6, 0.6, 0.6);
-
+	eCabeza->setMaterialName("IG2App/Toy");
 
 	nariz = cabeza->createChildSceneNode("nNariz"); 
 	Ogre::Entity* eNariz = cuello->getCreator()->createEntity("sphere.mesh");
@@ -31,7 +31,7 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	cuerpo = cuello->createChildSceneNode("nCuerpo");
 	eCuerpo = cuello->getCreator()->createEntity("sphere.mesh");
 	cuerpo->attachObject(eCuerpo);
-
+	eCuerpo->setMaterialName("IG2App/Toy");
 	//cuerpo->showBoundingBox(true);
 	
 	
