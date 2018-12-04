@@ -12,7 +12,8 @@ uniform float time;
 void main(){
 	vUv0 = uv0;
 	vUv1 = uv0;
-	vUv0.s -= (0.5 - time);
+	//vUv0.s -= (0.5 - time);       movimiento lateral
+	vUv0.s -= (0.5);     //estatico, si aproximo a 0 se mueve en una direccion y si aproximo a 1 en la contraria
 	vUv0.t = ( uv0.t - 0.5);
 	vUv0.s *= (0.5 * time);
 	vUv0.t *= ( 0.5 * time);

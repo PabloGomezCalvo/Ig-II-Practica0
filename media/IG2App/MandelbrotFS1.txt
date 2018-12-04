@@ -8,7 +8,6 @@ const int MaxIter = 500;
 out vec4 fFragColor;
 uniform sampler2D textura1;
 uniform float FB;
-uniform float intLuz;
 
 void main(){
 	float Creal = vUv0.s - 1.5;
@@ -27,7 +26,7 @@ void main(){
 	}
 	vec4 color = InColor;
 	if(z2 >4.0)
-		color = mix(OutColor1, OutColor2 , fract(float(iter)/25.0));
+		color = mix(OutColor1, OutColor2 , fract(float(iter) * 0.04));
 	vec4 colorTex = vec4(texture2D(textura1,vUv1));
 	color *= colorTex;
 	
