@@ -155,6 +155,15 @@ void IG2App::setupScene(void)
   
   //-------------------------------------------------------------------------
 
+  CompositorManager::getSingleton().addCompositor(vp,
+	  "Luminance");
+  CompositorManager::getSingleton().setCompositorEnabled(vp,
+	  "Luminance", false);
+
+  CompositorManager::getSingleton().addCompositor(vp,
+	  "Interference");
+  CompositorManager::getSingleton().setCompositorEnabled(vp,
+	  "Interference", true);
 
 
 }

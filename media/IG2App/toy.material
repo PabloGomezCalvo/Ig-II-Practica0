@@ -1,0 +1,52 @@
+vertex_program vertexShaderToy glsl
+{
+	source vertexShaderToy.txt 
+	default_params
+	{
+		param_named_auto model world_matrix
+		param_named_auto projection inverse_transpose_world_matrix
+		param_named_auto view inverse_transpose_world_matrix
+	}
+}
+
+fragment_program fragmentShaderToy glsl
+{
+	source fragmentShaderToy.txt
+	default_params
+	{
+		
+		 
+		param_named_auto positionL light_position 0
+		param_named_auto diffuseL light_diffuse_colour 0		
+
+	}
+}
+
+material toy
+{
+	technique
+	{
+
+		pass
+		{
+			cull_hardware none
+			cull_software none
+
+          vertex_program_ref vertexShaderToy 
+		{ 
+         
+		}
+		fragment_program_ref fragmentShaderToy 
+		{
+		
+		}
+            texture_unit 
+			{
+				
+				texture corrosion.jpg 2d
+				tex_address_mode clamp
+				filtering bilinear
+			}
+        }
+    }
+}

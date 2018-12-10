@@ -73,8 +73,8 @@ material IG2App/ejemploShadersLM
 		depth_write off
 		vertex_program vertexShaderLMglsl glsl
 		{ 
-		source vertexShaderLMglsl.txt // archivo código vertex shader
-        default_params // valores para las variables uniform
+		source vertexShaderLMglsl.txt 
+        default_params 
            {
            param_named_auto modelViewProjMat worldviewproj_matrix
           }
@@ -101,44 +101,5 @@ material IG2App/ejemploShadersLM
 } 
 }
 }
-material IG2App/Toy
-{
-	technique
-	{
 
-		pass
-		{
-			cull_hardware none
-			cull_software none
-			
-			
-            polygon_mode_overrideable false
 
-           vertex_program vertexShaderToy glsl
-		{ 
-		source vertexShaderToy.txt // archivo código vertex shader
-        default_params // valores para las variables uniform
-           {
-           param_named_auto modelViewProjMat worldviewproj_matrix
-          }
-		}
-		fragment_program fragmentShaderToy glsl
-		{
-		source fragmentShaderToy.txt // archivo código fragment shader
-
-		default_params // valores para las variables uniform
-			{
-				 
-				 param_named textura1 int 0
-
-			}
-		}
-            texture_unit texture1
-			{
-				texture corrosion.jpg 2d
-				tex_address_mode wrap
-				filtering trilinear
-			}
-        }
-    }
-}

@@ -1,0 +1,45 @@
+vertex_program LuminanceVS glsl
+{
+	source vertexShaderLMglsl.txt
+	default_params 
+           {
+           param_named_auto modelViewProjMat worldviewproj_matrix
+          }
+}
+
+fragment_program LuminancePS glsl
+{
+	source LuminancePS.txt
+	default_params {
+		param_named RTT0 int 0
+	}
+}
+
+
+
+material LuminancePS
+{
+	technique
+	{
+
+		pass
+		{
+			depth_check off
+            depth_write off
+
+			vertex_program_ref LuminanceVS
+			{
+			}
+
+			fragment_program_ref LuminancePS
+			{
+			}
+
+			texture_unit RTT0
+			{
+				
+				filtering none
+			}
+		}
+	}
+}
