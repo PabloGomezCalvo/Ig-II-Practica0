@@ -22,7 +22,7 @@ Toy::Toy(Ogre::SceneNode* sToy): Objects(sToy)
 	eCabeza->setMaterialName("toy");
 
 	nariz = cabeza->createChildSceneNode("nNariz"); 
-	Ogre::Entity* eNariz = cuello->getCreator()->createEntity("sphere.mesh");
+	Ogre::Entity* eNariz = cuello->getCreator()->createEntity("uv_sphere.mesh");
 	nariz->attachObject(eNariz);
 
 	nariz->setPosition(0, 0, -100);

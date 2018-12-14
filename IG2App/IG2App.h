@@ -40,8 +40,12 @@ protected:
   Objects* bomb;
   Objects* objetos;
 
+  Viewport* vp = nullptr;
+
   OgreBites::CameraMan* mCamMgr = nullptr;
 
+  bool interferencia = false;
+  int milisegundos = 0;
   bool targetSinbad = false;
 
 };

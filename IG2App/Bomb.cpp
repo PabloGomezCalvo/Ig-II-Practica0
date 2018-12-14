@@ -11,7 +11,7 @@ Bomb::Bomb(Ogre::SceneNode* Bnode) : Objects(Bnode)
 	mBomb->scale(Vector3(0.3, 0.3, 0.3));
 	mBomb->attachObject(ent);
 	mBomb->setPosition(Vector3(0, 25, 0));
-	ent->setMaterialName("IG2App/Bomb");
+	ent->setMaterialName("toy");
 	mBomb->setInitialState();
 
 	psys = mBomb->getCreator()->createParticleSystem("parSys", "Smoke");

@@ -1,24 +1,30 @@
-vertex_program vertexShaderToy glsl
+vertex_program vertexShaderToy glsl 
 {
-	source vertexShaderToy.txt 
-	default_params
+
+	source vertexShaderToy.txt
+
+	default_params 
 	{
-		param_named_auto model world_matrix
-		param_named_auto projection inverse_transpose_world_matrix
-		param_named_auto view inverse_transpose_world_matrix
+
+		param_named_auto modelViewProjMat worldviewproj_matrix
+		param_named_auto normalMat inverse_transpose_world_matrix
 	}
 }
 
-fragment_program fragmentShaderToy glsl
+fragment_program fragmentShaderToy glsl 
 {
 	source fragmentShaderToy.txt
-	default_params
-	{
-		
-		 
-		param_named_auto positionL light_position 0
-		param_named_auto diffuseL light_diffuse_colour 0		
 
+	default_params 
+	{
+		param_named frontFaceColor float3 0.0 0.8 0.5	//naranja
+		param_named backFaceColor float3 0.5 0.5 0.5	//gris
+		
+		
+		param_named_auto lightPosition light_position 0
+		param_named_auto lightDiffuse light_diffuse_colour 0 
+
+		param_named text1 int 0
 	}
 }
 
@@ -26,27 +32,24 @@ material toy
 {
 	technique
 	{
-
 		pass
 		{
 			cull_hardware none
 			cull_software none
 
-          vertex_program_ref vertexShaderToy 
-		{ 
-         
-		}
-		fragment_program_ref fragmentShaderToy 
-		{
-		
-		}
-            texture_unit 
+			vertex_program_ref vertexShaderToy
 			{
-				
-				texture corrosion.jpg 2d
-				tex_address_mode clamp
-				filtering bilinear
+
 			}
-        }
-    }
+			fragment_program_ref fragmentShaderToy
+			{
+
+			}
+			texture_unit texture1
+			{
+				texture corrosion.jpg 2d
+				tex_address_mode wrap
+			}
+		}
+	}
 }

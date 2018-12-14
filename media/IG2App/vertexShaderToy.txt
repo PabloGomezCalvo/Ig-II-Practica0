@@ -1,20 +1,20 @@
 #version 330 core
 
-in vec4 aPos;
-in vec3 aNormal; 
-in vec2 aTexCoords;
+in vec4 vertex;
+in vec3 normal;
 
-out vec3 FragPos;
-out vec3 Normal; // en world space
-out vec2 TexCoords;
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+in vec2 uv0;
 
-void main() {
- 
-FragPos = vec3(model * aPos); // en world space
-Normal = mat3(transpose(inverse(model))) * aNormal;
-TexCoords = aTexCoords;
-gl_Position = projection * view * vec4(FragPos, 1.0);
+uniform mat4 modelViewProjMat;
+uniform mat4 normalMat;
+
+out vec3 outNormal;
+out vec2 vUv0;
+void main()
+{
+	vUv0 = uv0;
+
+	outNormal = mat3(normalMat)*normal;
+
+	gl_Position = modelViewProjMat * vertex;
 }

@@ -9,7 +9,7 @@ vertex_program InterferenceVS glsl
 
 fragment_program InterferencePS glsl
 {
-	source LuminancePS.txt
+	source InterferencePS.txt
 	default_params {
 		param_named RTT0 int 0
 	}

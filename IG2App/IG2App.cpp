@@ -23,7 +23,13 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  targetSinbad = !targetSinbad;
   
   }
-  
+
+  else if (evt.keysym.sym == SDLK_i) {
+	  CompositorManager::getSingleton().setCompositorEnabled(vp,
+		  "Interference", true);
+	  //interferencia = true;
+	  //milisegundos = 0;
+  }
   
   return true;
 }
@@ -83,7 +89,7 @@ void IG2App::setupScene(void)
   //mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
   
   // and tell it to render into the main window
-  Viewport* vp = getRenderWindow()->addViewport(cam);
+  vp = getRenderWindow()->addViewport(cam);
   //vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
 
   //------------------------------------------------------------------------
@@ -163,8 +169,16 @@ void IG2App::setupScene(void)
   CompositorManager::getSingleton().addCompositor(vp,
 	  "Interference");
   CompositorManager::getSingleton().setCompositorEnabled(vp,
-	  "Interference", true);
-
+	  "Interference", false); /*	  if (interferencia) {
+		  milisegundos++;
+		  std::cout << milisegundos << std::endl;
+		  if (milisegundos == 500) {
+			  CompositorManager::getSingleton().setCompositorEnabled(vp,
+				  "Interference", false);
+			  interferencia = false;
+		  }
+	  }
+  */
 
 }
 
