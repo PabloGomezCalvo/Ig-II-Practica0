@@ -4,7 +4,18 @@
 
 
 using namespace Ogre;
+void IG2App::frameRendered(const Ogre::FrameEvent& evt) {
+	if (interferencia) {
+		milisegundos++;
+		std::cout << milisegundos << std::endl;
+		if (milisegundos == 180) { //180 es porque si el juego va a 60fps, para que sean 3 segundos son 60*3 = 180
+			CompositorManager::getSingleton().setCompositorEnabled(vp,
+				"Interference", false);
+			interferencia = false;
+		}
+	}
 
+}
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
   if (evt.keysym.sym == SDLK_ESCAPE)
@@ -27,8 +38,8 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   else if (evt.keysym.sym == SDLK_i) {
 	  CompositorManager::getSingleton().setCompositorEnabled(vp,
 		  "Interference", true);
-	  //interferencia = true;
-	  //milisegundos = 0;
+	  interferencia = true;
+	  milisegundos = 0;
   }
   
   return true;
@@ -169,16 +180,8 @@ void IG2App::setupScene(void)
   CompositorManager::getSingleton().addCompositor(vp,
 	  "Interference");
   CompositorManager::getSingleton().setCompositorEnabled(vp,
-	  "Interference", false); /*	  if (interferencia) {
-		  milisegundos++;
-		  std::cout << milisegundos << std::endl;
-		  if (milisegundos == 500) {
-			  CompositorManager::getSingleton().setCompositorEnabled(vp,
-				  "Interference", false);
-			  interferencia = false;
-		  }
-	  }
-  */
+	  "Interference", false);    
+  
 
 }
 

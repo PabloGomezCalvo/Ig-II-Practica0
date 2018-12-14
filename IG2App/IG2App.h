@@ -23,7 +23,7 @@ protected:
   virtual void setup();
   virtual void shutdown();
   virtual void setupScene();
-
+  virtual void frameRendered(const Ogre::FrameEvent& evt);
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
       
   Ogre::SceneManager* mSM = nullptr;
